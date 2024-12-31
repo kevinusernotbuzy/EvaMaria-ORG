@@ -1,12 +1,11 @@
-if [ -z $UPSTREAM_REPO ]
-then
-  echo "Cloning main Repository"
-  git clone https://github.com/The-Happy-Hour/EvaMaria-ORG /EvaMaria-ORG
-else
-  echo "Cloning Custom Repo from $UPSTREAM_REPO "
-  git clone $UPSTREAM_REPO /EvaMaria-ORG
-fi
-cd /EvaMaria-ORG
+#!/bin/bash
+
+echo "Installing requirements..."
 pip3 install -U -r requirements.txt
-echo "Starting Bot...."
+
+# Start Flask app for health check
+gunicorn app:app --bind 0.0.0.0:$PORT --daemon
+
+# Start the bot
+echo "Starting Bot..."
 python3 bot.py
