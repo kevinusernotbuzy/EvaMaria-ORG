@@ -1,12 +1,23 @@
 FROM python:3.8-slim-buster
 
+# Update and install dependencies
 RUN apt update && apt upgrade -y
 RUN apt install git -y
-COPY requirements.txt /requirements.txt
 
-RUN cd /
+# Copy requirements and install them
+COPY requirements.txt /requirements.txt
 RUN pip3 install -U pip && pip3 install -U -r requirements.txt
-RUN mkdir /EvaMaria
-WORKDIR /EvaMaria
+
+# Create app directory
+RUN mkdir /app
+WORKDIR /app
+
+# Copy files
 COPY start.sh /start.sh
+COPY app.py /app.py
+COPY bot.py /bot.py
+
+# Expose the port for Flask (needed for Render)
+EXPOSE 5000
+
 CMD ["/bin/bash", "/start.sh"]
