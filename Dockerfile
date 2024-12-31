@@ -17,7 +17,8 @@ COPY start.sh /start.sh
 COPY app.py /app.py
 COPY bot.py /bot.py
 
-# Expose the port for Flask (needed for Render)
+# Expose the port for Flask
 EXPOSE 5000
 
+# Default command to run start.sh
 CMD ["/bin/bash", "/start.sh"]
