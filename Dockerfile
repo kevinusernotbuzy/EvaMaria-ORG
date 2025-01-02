@@ -18,7 +18,7 @@ COPY app.py /app.py
 COPY bot.py /bot.py
 
 # Expose the port for Flask
-EXPOSE 5000
+EXPOSE 8080
 
 # Default command to run start.sh
 CMD ["/bin/bash", "/start.sh"]
