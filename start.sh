@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Installing dependencies..."
-pip3 install -U -r requirements.txt || { echo "Dependency installation failed!"; exit 1; }
+pip install -U -r requirements.txt || { echo "Dependency installation failed!"; exit 1; }
 
 echo "Starting Flask app for health check..."
 gunicorn app:app --bind 0.0.0.0:$PORT --daemon || { echo "Flask app failed to start!"; exit 1; }
