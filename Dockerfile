@@ -15,4 +15,5 @@ COPY . /app
 EXPOSE 8080
 
 # Start the bot via start.sh
-CMD ["/bin/bash", "/start.sh"]
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
