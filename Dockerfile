@@ -1,24 +1,18 @@
 FROM python:3.8-slim-buster
 
-# Update and install dependencies
-RUN apt update && apt upgrade -y
-RUN apt install git -y
+# Install dependencies
+RUN apt-get update && apt-get upgrade -y && apt-get install -y git
 
-# Copy requirements and install them
+# Copy and install Python dependencies
 COPY requirements.txt /requirements.txt
-RUN pip3 install -U pip && pip3 install -U -r requirements.txt
+RUN pip install --no-cache-dir -U pip && pip install --no-cache-dir -r requirements.txt
 
-# Create app directory
-RUN mkdir /app
+# Set up app directory
 WORKDIR /app
+COPY . /app
 
-# Copy files
-COPY start.sh /start.sh
-COPY app.py /app.py
-COPY bot.py /bot.py
-
-# Expose the port for Flask
+# Expose the Flask app port
 EXPOSE 8080
 
-# Default command to run start.sh
+# Start the bot via start.sh
 CMD ["/bin/bash", "/start.sh"]
